@@ -1,0 +1,12 @@
+s = 0.7 * 1e-3
+xo = 3.0 * 1e-3
+y_v = 0.1 * 1e-3
+x_v = 1 * 1e-3
+xu = 1.25 * 1e-3
+
+U0 = ( ~((xv-xo)**2 + yv**2 < s**2) * ((xv-xo)**2 + yv**2 < (1.25*s)**2) )
+U0 = U0 + ( ~(1.5*np.abs(xv-x_v) + np.abs(yv + 8*y_v) < 2*s) * (1.5*np.abs(xv-x_v) + np.abs(yv + 5*y_v) < 2*s))
+U0 = U0 + (~((xv+xo)**2 + yv**2 < s**2) * ((xv+xo)**2 + yv**2 < (1.25*s)**2) * (xv<-0.85*xo))
+U0 = U0 + (~((xv+xu)**2 + yv**2 < s**2) * ((xv+xu)**2 + yv**2 < (1.25*s)**2) * (yv > 0) )
+U0 = U0 + ( (np.abs(xv+xu+1.14*s)<0.12*s) * (np.abs(yv)<s) * (yv<0) ) + ( (np.abs(xv+xu-1.14*s)<0.12*s) * (np.abs(yv)<s) * (yv<0) )
+
